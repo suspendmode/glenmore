@@ -1,0 +1,67 @@
+/**
+ * Copyright (C) Piotr Kucharski
+ * email: suspendmode@gmail.com
+ *
+ * All rights reserved. Any use, copying, modification, distribution and selling
+ * of this software and it's documentation for any purposes without authors' written
+ * permission is hereby prohibited.
+ */
+package patterns.structural.composite {
+  
+  /**
+   *
+   * @author piku
+   *
+   */
+  public interface IComponentList {
+    
+    /**
+     *
+     * adds object with given name
+     *
+     * @param object Object instance of business object to register
+     * @param name String name of business object
+     *
+     */
+    function add(object : Object, name : String) : void;
+    
+    /**
+     *
+     * @param object
+     *
+     */
+    function remove(object : Object) : void;
+    
+    /**
+     *
+     * @param name
+     *
+     */
+    function removeByName(name : String) : void;
+    
+    /**
+     *
+     * @param object
+     * @return
+     *
+     */
+    function getName(object : Object, throwsException : Boolean = false) : String;
+    
+    /**
+     *
+     * @param type
+     * @return
+     *
+     */
+    function getByType(type : Class, throwsException : Boolean = false) : *;
+    
+    /**
+     * Returns object by name
+     *
+     * @param name String name of business object
+     * @return Object instance of business object
+     *
+     */
+    function get(name : String, throwsException : Boolean = false) : *
+  }
+}

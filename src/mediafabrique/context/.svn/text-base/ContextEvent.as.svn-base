@@ -1,0 +1,43 @@
+/**
+ * Copyright (C) Piotr Kucharski
+ * email: suspendmode@gmail.com
+ *
+ * All rights reserved. Any use, copying, modification, distribution and selling
+ * of this software and it's documentation for any purposes without authors' written
+ * permission is hereby prohibited.
+ */
+package context {
+  import patterns.structural.composite.PropagableEvent;
+  
+  /**
+   *
+   * @author Peter
+   *
+   */
+  public class ContextEvent extends PropagableEvent {
+    
+    /**
+     *
+     * @param type
+     * @param bubbles
+     * @param cancelable
+     *
+     */
+    public function ContextEvent(type : String, bubbles : Boolean = false,
+      cancelable : Boolean = false) {
+      super(type, bubbles, cancelable);
+    }
+    
+    /**
+     *
+     * @param completeListener
+     * @param errorListener
+     *
+     */
+    override public function propagate(completeListener : Function = null,
+      errorListener : Function = null) : void {
+      super.propagate(completeListener, errorListener);
+      Context.root.dispatchEvent(this);
+    }
+  }
+}

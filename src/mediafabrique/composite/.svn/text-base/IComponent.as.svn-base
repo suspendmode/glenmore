@@ -1,0 +1,49 @@
+/**
+ * Copyright (C) Piotr Kucharski
+ * email: suspendmode@gmail.com
+ *
+ * All rights reserved. Any use, copying, modification, distribution and selling
+ * of this software and it's documentation for any purposes without authors' written
+ * permission is hereby prohibited.
+ */
+package patterns.structural.composite {
+  import flash.events.IEventDispatcher;
+  
+  import patterns.concurrency.event.ICompoundEventDispatcher;
+  
+  /**
+   *
+   * @author piku
+   *
+   */
+  public interface IComponent extends ICompoundEventDispatcher {
+    
+    /**
+     *
+     * @param value
+     *
+     */
+    function set id(value : String) : void;
+    
+    /**
+     *
+     * @return
+     *
+     */
+    function get id() : String;
+    
+    /**
+     *
+     * @param value
+     *
+     */
+    function set parent(value : ICompositeComponent) : void;
+    
+    /**
+     *
+     * @return
+     *
+     */
+    function get parent() : ICompositeComponent;
+  }
+}

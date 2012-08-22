@@ -1,0 +1,328 @@
+/**
+ * Copyright (C) Piotr Kucharski
+ * email: suspendmode@gmail.com
+ *
+ * All rights reserved. Any use, copying, modification, distribution and selling
+ * of this software and it's documentation for any purposes without authors' written
+ * permission is hereby prohibited.
+ */
+package util {
+  import flash.system.ApplicationDomain;
+  import flash.utils.Dictionary;
+  import flash.utils.getQualifiedClassName;
+
+  /**
+   *
+   * @author Work
+   *
+   */
+  public class TypeUtil {
+
+    /**
+     *
+     * @param target
+     * @return
+     *
+     */
+    public static function getType(target : Object) : XML {
+      /*var cache : DescribeTypeCacheRecord = DescribeTypeCache.describeType(target);
+      return cache.typeDescription;*/
+      return null;
+    }
+
+    /**
+     *
+     * @param classReference
+     * @param interfaceClass
+     * @return
+     *
+     */
+    public static function implementsInterface(classReference : Class, interfaceClass : Class) : Boolean {
+      var commandType : XML = getType(classReference);
+      var asyncCommandDefinition : String = getQualifiedClassName(interfaceClass);
+
+      for each (var implementsInterface : XML in commandType..implementsInterface) {
+        var type : String = implementsInterface.@type;
+
+        if (type == asyncCommandDefinition) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    /**
+     *
+     */
+    private static const classNameCache : Dictionary = new Dictionary();
+
+    /**
+     *
+     * @param target
+     * @return
+     *
+     */
+    public static function getClassName(target : *) : String {
+      if (target in classNameCache) {
+        return classNameCache[target];
+      } else {
+        var name : String = getQualifiedClassName(target);
+        var i : int = name.indexOf("::");
+
+        if (i != -1) {
+          name = name.substring(i + 2, name.length);
+        }
+        classNameCache[target] = name;
+        return name;
+      }
+    }
+
+    /**
+     *
+     */
+    private static const writePropertyNamesCache : Dictionary = new Dictionary(true);
+
+    /**
+     *
+     */
+    private static const readPropertyNamesCache : Dictionary = new Dictionary(true);
+
+    /**
+     *
+     */
+    private static const readWritePropertyNamesCache : Dictionary = new Dictionary(true);
+
+    /**
+     *
+     * @param type
+     * @param read
+     * @param write
+     * @return
+     *
+     */
+    private static function getPropertyNamesFromCache(type : *, read : Boolean = true,
+      write : Boolean = false) : Array {
+      var list : Array = [];
+
+      if (read && write) {
+        list = readWritePropertyNamesCache[type];
+      }
+
+      if (read) {
+        list = readPropertyNamesCache[type];
+      }
+
+      if (write) {
+        list = writePropertyNamesCache[type];
+      }
+      return list;
+    }
+
+    /**
+     *
+     * @param type
+     * @param propertyName
+     * @param read
+     * @param write
+     *
+     */
+    private static function storeProperty(type : *, propertyName : String, read : Boolean = true,
+      write : Boolean = false) : void {
+      var list : Array = [];
+
+      if (read && write) {
+        if (type in readWritePropertyNamesCache) {
+          list = readWritePropertyNamesCache[type];
+        } else {
+          list = readWritePropertyNamesCache[type] = [];
+        }
+      }
+
+      if (read) {
+
+        if (type in readPropertyNamesCache) {
+          list = readPropertyNamesCache[type];
+        } else {
+          list = readPropertyNamesCache[type] = [];
+        }
+      }
+
+      if (write) {
+        if (type in writePropertyNamesCache) {
+          list = writePropertyNamesCache[type];
+        } else {
+          list = writePropertyNamesCache[type] = [];
+        }
+      }
+      list.push(propertyName);
+    }
+
+    /**
+     *
+     * @param target
+     * @param read
+     * @param write
+     * @return
+     *
+     */
+    public static function getAccessors(target : *, read : Boolean = true, write : Boolean = false) : Array {
+      var targetType : XML = getType(target);
+      var propertyNames : Array = [];
+      var type : String = targetType.@type;
+
+      /* if (type in propertyNamesCache) {
+         propertyNames = getPropertyNamesFromCache(type, read, write);
+         return propertyNames;
+         } else {
+         var typeFunction : Function;
+
+         if (read && write) {
+         typeFunction = function(xml : XML) : Boolean {
+         return xml.@type == "read" || xml.@type == "readwrite";
+         }
+         }
+
+         if (read) {
+         typeFunction = function(xml : XML) : Boolean {
+         return xml.@type == "read";
+         }
+
+         }
+
+         if (write) {
+         typeFunction = function(xml : XML) : Boolean {
+         return xml.@type == "write";
+         }
+
+         }
+
+         for each (var accessorXML : XML in targetType..accessor) {
+         var accessorName : String = accessorXML.@name;
+         storeProperty(type, accessorName, read, write);
+
+         if (typeFunction(accessorXML)) {
+         propertyNames.push(accessorName);
+         }
+         }
+         }
+         return propertyNames;
+       */
+      return null;
+    }
+
+    public static function getVariables(target : *) : Array {
+      return null; //getPropertyNamesFromCache(type, true, true);
+    }
+
+    public static function getReadableProperties(target : *) : Array {
+      /*       var targetType : XML = getType(target);
+         var type : String = targetType.@type;
+         var cache : Array = [];
+
+         if (type in propertyNamesCache) {
+         cache = propertyNamesCache[type];
+         return cache.concat();
+         } else {
+         for each (var variableXML : XML in targetType..variable) {
+         var variableName : String = variableXML.@name;
+         cache.push(variableName);
+         }
+
+         for each (var accessorXML : XML in targetType..accessor) {
+         if (accessorXML.@type == "read" || accessorXML.@type == "readwrite") {
+         var accessorName : String = accessorXML.@name;
+         cache.push(accessorName);
+         }
+         }
+         propertyNamesCache[type] = cache;
+         return cache;
+
+         }
+       */
+      return null; //
+    }
+
+    public static function getWritablePropertyNames(target : *) : Array {
+      /* var targetType : XML = getType(target);
+         var type : String = targetType.@type;
+         var cache : Array = [];
+
+         if (type in propertyNamesCache) {
+         cache = propertyNamesCache[type];
+         return cache.concat();
+         } else {
+         for each (var variableXML : XML in targetType..variable) {
+         var variableName : String = variableXML.@name;
+         cache.push(variableName);
+         }
+
+         for each (var accessorXML : XML in targetType..accessor) {
+         if (accessorXML.@type == "write" || accessorXML.@type == "readwrite") {
+         var accessorName : String = accessorXML.@name;
+         cache.push(accessorName);
+         }
+         }
+         propertyNamesCache[type] = cache;
+         return cache;
+         }
+       */
+      return null;
+    }
+
+    /**
+     *
+     * @param target
+     * @return
+     *
+     */
+    public static function getInterfaces(target : *) : Array {
+      var type : XML = getType(target);
+      var list : Array = [];
+
+      for each (var implementsInterface : XML in type..implementsInterface) {
+        var intefaceAlias : String = implementsInterface.@type;
+        var domain : ApplicationDomain = ApplicationDomain.currentDomain;
+
+        var inteface : Class = domain.getDefinition(intefaceAlias)as Class;
+        list.push(inteface);
+      }
+      return list;
+    }
+
+    /**
+     *
+     * @param target
+     * @return
+     *
+     */
+    public static function getSuper(target : *) : Array {
+      var type : XML = getType(target);
+      var list : Array = [];
+
+      for each (var extendsClass : XML in type..extendsClass) {
+        var classAlias : String = extendsClass.@type;
+        var domain : ApplicationDomain = ApplicationDomain.currentDomain;
+        var classReference : Class = domain.getDefinition(classAlias)as Class;
+        list.push(classReference);
+      }
+      return list;
+    }
+
+    /**
+     *
+     * @param target
+     * @return
+     *
+     */
+    public static function getMethodNames(target : *) : Array {
+      var type : XML = getType(target);
+      var list : Array = [];
+
+      for each (var method : XML in type..method) {
+        var name : String = method.@name;
+        list.push(name);
+      }
+      return list;
+    }
+  }
+}

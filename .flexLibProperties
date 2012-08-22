@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="mediafabrique.composite.Component"/>
+    <classEntry path="mediafabrique.composite.Container"/>
+    <classEntry path="mediafabrique.composite.ContainerEvent"/>
+    <classEntry path="mediafabrique.composite.Notification"/>
+    <classEntry path="mediafabrique.context.Context"/>
+    <classEntry path="mediafabrique.context.IContext"/>
+    <classEntry path="mediafabrique.event.CompoundEventDispatcher"/>
+    <classEntry path="mediafabrique.glenmore.interfaces.IComponent"/>
+    <classEntry path="mediafabrique.glenmore.interfaces.IComponentList"/>
+    <classEntry path="mediafabrique.glenmore.interfaces.ICompoundEventDispatcher"/>
+    <classEntry path="mediafabrique.glenmore.interfaces.IContainer"/>
+    <classEntry path="mediafabrique.glenmore.interfaces.ILifecycle"/>
+    <classEntry path="mediafabrique.glenmore.interfaces.IPropagableEvent"/>
+    <classEntry path="mediafabrique.lifecycle.EventDispatcherEntry"/>
+    <classEntry path="mediafabrique.lifecycle.LazyObject"/>
+    <classEntry path="mediafabrique.lifecycle.LifecycleEvent"/>
+    <classEntry path="mediafabrique.lifecycle.LifecycleObject"/>
+    <classEntry path="mediafabrique.pattern.Mediator"/>
+    <classEntry path="mediafabrique.test.composite.ComponentTest"/>
+    <classEntry path="mediafabrique.test.composite.ContainerTest"/>
+    <classEntry path="mediafabrique.test.event.CompoundEventDispatcherTest"/>
+    <classEntry path="mediafabrique.test.lifecycle.LazyObjectTest"/>
+    <classEntry path="mediafabrique.test.lifecycle.LifecycleObjectTest"/>
+    <classEntry path="mediafabrique.util.ArrayUtil"/>
+    <classEntry path="mediafabrique.util.AutowireUtil"/>
+    <classEntry path="mediafabrique.util.DictionaryUtil"/>
+    <classEntry path="mediafabrique.util.DisplayObjectUtil"/>
+    <classEntry path="mediafabrique.util.FactoryUtil"/>
+    <classEntry path="mediafabrique.util.FunctionUtil"/>
+    <classEntry path="mediafabrique.util.GUIDUtil"/>
+    <classEntry path="mediafabrique.util.InvalidationUtil"/>
+    <classEntry path="mediafabrique.util.SearchUtil"/>
+    <classEntry path="mediafabrique.util.getDefinitionNames"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
